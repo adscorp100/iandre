@@ -88,7 +88,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
             I'm the co-founder and CEO of <a href="https://screenapp.io">ScreenApp</a>, an AI note taker for meetings and recordings, and <a href="https://carevo.com.au">Carevo</a>, a connection platform that helps Australian families find NDIS and aged care providers. I started Carevo after my family's own search for care.
           </p>
           <p class="bio">
-            Before that I worked in sales at Prezi, Infogram and myInterview. I live in Sydney.
+            Before that I worked in sales at <a href="https://prezi.com">Prezi</a>, <a href="https://infogram.com">Infogram</a> and <a href="https://www.radancy.com/en/myinterview/">myInterview</a>. I live in Sydney.
           </p>
         </header>
 
@@ -123,7 +123,9 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
           <h2 id="path">Path</h2>
           <ul class="list">
             {path.map((t) => (
-              <li><div><span class="t">{t.what}</span><span class="d">{t.when}</span></div></li>
+              <li>{t.url
+                ? <a href={t.url}><span class="t">{t.what}{t.note && <span class="note">, {t.note}</span>}</span><span class="d">{t.when}</span></a>
+                : <div><span class="t">{t.what}{t.note && <span class="note">, {t.note}</span>}</span><span class="d">{t.when}</span></div>}</li>
             ))}
           </ul>
         </section>
@@ -184,6 +186,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
   .list a, .list li > div { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 10px 0; text-decoration: none; color: var(--fg); }
   .list .t { text-wrap: pretty; min-width: 0; }
   .list .d { flex: none; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 13px; color: var(--fg-3); font-variant-numeric: tabular-nums; text-align: right; }
+  .list .note { color: var(--fg-2); }
   .list a:hover .t { text-decoration: underline; text-decoration-color: var(--underline); text-underline-offset: 3px; }
 
   footer { display: flex; gap: 20px; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; }

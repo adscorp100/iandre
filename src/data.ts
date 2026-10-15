@@ -45,13 +45,15 @@ export const work: { name: string; description: string; url: string; domain: str
 export const cofounder = 'Buddhika Jayawardhana';
 
 // Path, newest first.
-export const path: { when: string; what: string; detail: string }[] = [
-  { when: 'Now', what: 'ScreenApp', detail: 'Co-founder and CEO.' },
-  { when: 'Now', what: 'Carevo', detail: 'Co-founder and CEO.' },
-  { when: '2023', what: 'UNSW Founders 10x Accelerator', detail: 'Accelerator program.' },
-  { when: '2022', what: 'Antler', detail: 'Founder program.' },
-  { when: 'Before', what: 'Prezi, Infogram, myInterview', detail: 'B2B SaaS sales and business development.' },
-  { when: '2014', what: 'UNSW Sydney', detail: 'Bachelor of Commerce and Bachelor of Arts.' },
+export const path: { when: string; what: string; note?: string; url?: string }[] = [
+  { when: 'Now', what: 'ScreenApp', url: 'https://screenapp.io' },
+  { when: 'Now', what: 'Carevo', url: 'https://carevo.com.au' },
+  { when: '2023', what: 'UNSW Founders 10x Accelerator', url: 'https://unswfounders.com' },
+  { when: '2022', what: 'Antler Australia', note: 'Cohort 7', url: 'https://www.antler.co/location/australia' },
+  { when: 'Before', what: 'myInterview', note: 'now part of Radancy', url: 'https://www.radancy.com/en/myinterview/' },
+  { when: 'Before', what: 'Infogram', url: 'https://infogram.com' },
+  { when: 'Before', what: 'Prezi', url: 'https://prezi.com' },
+  { when: '2014', what: 'UNSW Sydney', url: 'https://www.unsw.edu.au' },
 ];
 
 export const talks: { event: string; role: string; year: string; url?: string }[] = [
