@@ -62,7 +62,7 @@ export const talks: { event: string; role: string; year: string; url?: string }[
 
 // Video appearances, shown with thumbnails.
 export const videos: { show: string; title: string; year: string; id: string }[] = [
-  { show: 'The Diary of a Founder', title: 'STOP Building! This Is Why Your Startup WILL Fail', year: '2026', id: 'hxTc6DRMoxI' },
+  { show: 'The Diary of a Founder', title: 'Interview on The Diary of a Founder', year: '2026', id: 'hxTc6DRMoxI' },
 ];
 
 export const press: { publisher: string; kind: string; title: string; year: string; url: string }[] = [
