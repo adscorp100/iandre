@@ -188,7 +188,8 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
 
   footer { display: flex; gap: 20px; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; }
 
-  .art { position: sticky; top: 72px; }
+  /* Art stays vertically centred in the viewport while the text column scrolls. */
+  .art { position: sticky; top: 0; height: 100vh; height: 100dvh; margin-top: -72px; display: flex; align-items: center; }
   .art img { display: block; width: 100%; height: auto; max-height: calc(100vh - 144px); object-fit: cover; border-radius: 16px; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.35); }
 
   :focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 3px; }
@@ -200,7 +201,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
 
   @media (max-width: 900px) {
     .page { grid-template-columns: minmax(0, 1fr); padding: 40px 20px 56px; gap: 40px; }
-    .art { position: static; order: -1; }
+    .art { position: static; order: -1; height: auto; margin-top: 0; display: block; }
     .art img { max-height: 46vh; aspect-ratio: 4 / 3; object-position: 50% 40%; }
     main { gap: 36px; }
     h1 { font-size: 26px; }
