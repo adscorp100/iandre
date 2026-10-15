@@ -108,7 +108,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
               <li>{t.photo
                 ? <button type="button" class="row-btn" data-lightbox={`${b}${t.photo.src}`} data-alt={t.photo.alt} data-caption={t.photo.caption} aria-haspopup="dialog">
                     <span class="t">{t.event}<span class="note">, {t.role.toLowerCase()}</span></span>
-                    <span class="d"><img class="thumb" src={`${b}${t.photo.thumb}`} alt="" width="48" height="32" loading="lazy" />{t.year}</span>
+                    <span class="d">{t.year}</span>
                   </button>
                 : <div><span class="t">{t.event}<span class="note">, {t.role.toLowerCase()}</span></span><span class="d">{t.year}</span></div>}</li>
             ))}
@@ -213,12 +213,9 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
   .list a:hover .t { text-decoration: underline; text-decoration-color: var(--underline); text-underline-offset: 3px; }
 
 
-  .row-btn { all: unset; box-sizing: border-box; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 10px 0; cursor: zoom-in; color: var(--fg); }
+  .row-btn { all: unset; box-sizing: border-box; width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 10px 0; cursor: zoom-in; color: var(--fg); }
   .row-btn:hover .t { text-decoration: underline; text-decoration-color: var(--underline); text-underline-offset: 3px; }
   .row-btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 3px; }
-  .row-btn .d { display: inline-flex; align-items: center; gap: 12px; }
-  .thumb { width: 48px; height: 32px; object-fit: cover; border-radius: 4px; box-shadow: 0 0 0 1px var(--line); transition: transform 200ms ease; }
-  .row-btn:hover .thumb { transform: scale(1.06); }
   .lightbox { padding: 0; border: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 94vh; overflow: visible; }
   .lightbox::backdrop { background: rgb(10 10 10 / 0.82); backdrop-filter: blur(4px); }
   .lightbox[open] { animation: lb 220ms ease both; }

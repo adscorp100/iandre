@@ -56,7 +56,7 @@ export const path: { when: string; what: string; note?: string; url?: string }[]
   { when: '2014', what: 'UNSW Sydney', url: 'https://www.unsw.edu.au' },
 ];
 
-export const talks: { event: string; role: string; year: string; url?: string; photo?: { src: string; thumb: string; mid: string; alt: string; caption: string } }[] = [
+export const talks: { event: string; role: string; year: string; url?: string; photo?: { src: string; mid: string; alt: string; caption: string } }[] = [
   {
     event: 'Google Cloud Summit Sydney',
     role: 'Panel',
@@ -64,7 +64,6 @@ export const talks: { event: string; role: string; year: string; url?: string; p
     photo: {
       src: '/google-cloud-summit-2025.webp',
       mid: '/google-cloud-summit-2025-960.webp',
-      thumb: '/google-cloud-summit-2025-thumb.webp',
       alt: 'Andre Smith speaking on a panel at Google Cloud Summit Sydney 2025, with Google Cloud, Montu and Lorikeet',
       caption: 'Panel at Google Cloud Summit Sydney, 2025. Andre Smith, co-founder and CEO of ScreenApp, far right.',
     },
