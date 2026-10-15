@@ -136,7 +136,10 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
         </section>
 
         <footer>
-          {contact.map((e) => <a href={e.url} rel="me">{e.label}</a>)}
+          <a class="cta" href={contact[0].url} rel="me">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+            Connect on LinkedIn
+          </a>
         </footer>
       </main>
 
@@ -175,13 +178,13 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
 
 <style is:global>
   :root {
-    --bg: #fbfaf8; --fg: #1a1a1a; --fg-2: #5b5b5b; --fg-3: #8a8a8a; --line: #ebe8e3; --link: #1a1a1a; --underline: #c9c4bb;
+    --bg: #fbfaf8; --fg: #1a1a1a; --fg-2: #5b5b5b; --fg-3: #8a8a8a; --line: #ebe8e3; --link: #1a1a1a; --underline: #c9c4bb; --btn-bg: #ffffff; --btn-border: #e2ded6;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) { --bg: #111111; --fg: #ededed; --fg-2: #a6a6a6; --fg-3: #7d7d7d; --line: #232323; --link: #ededed; --underline: #4a4a4a; color-scheme: dark; }
+    :root:not([data-theme='light']) { --bg: #111111; --fg: #ededed; --fg-2: #a6a6a6; --fg-3: #7d7d7d; --line: #232323; --link: #ededed; --underline: #4a4a4a; --btn-bg: #1a1a1a; --btn-border: #333333; color-scheme: dark; }
   }
-  :root[data-theme='dark'] { --bg: #111111; --fg: #ededed; --fg-2: #a6a6a6; --fg-3: #7d7d7d; --line: #232323; --link: #ededed; --underline: #4a4a4a; color-scheme: dark; }
+  :root[data-theme='dark'] { --bg: #111111; --fg: #ededed; --fg-2: #a6a6a6; --fg-3: #7d7d7d; --line: #232323; --link: #ededed; --underline: #4a4a4a; --btn-bg: #1a1a1a; --btn-border: #333333; color-scheme: dark; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
@@ -224,7 +227,17 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
   .lightbox .cap { margin-top: 12px; text-align: center; color: #d8d8d8; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; }
   .lightbox .close { position: absolute; top: -40px; right: 0; background: none; border: 0; color: #eee; font: 500 14px 'Inter Variable', system-ui, sans-serif; cursor: pointer; padding: 8px 0; }
 
-  footer { display: flex; gap: 20px; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; }
+  footer { display: flex; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 11px 20px; border-radius: 999px;
+    background: var(--btn-bg); color: var(--fg); border: 1px solid var(--btn-border);
+    font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: -0.005em;
+    text-decoration: none; box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+    transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  }
+  .cta:hover { border-color: var(--fg-3); box-shadow: 0 4px 14px -6px rgb(0 0 0 / 0.18); transform: translateY(-1px); }
+  .cta svg { color: #0a66c2; }
 
   /* Art stays vertically centred in the viewport while the text column scrolls. */
   .art { position: sticky; top: 0; height: 100vh; height: 100dvh; margin-top: -72px; display: flex; align-items: center; }
