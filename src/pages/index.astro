@@ -3,6 +3,9 @@ import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal
 import serifWoff2 from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
 import { profile, work, press, path, talks, videos, contact, cofounder, sameAsExtra } from '../data';
 
+// Asset prefix: '' on iandre.com, '/iandre' while previewing on github.io.
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const { title, description } = profile;
 const ogImage = `${profile.url}/og.png`;
 const andre = { '@id': `${profile.url}/#andre` };
@@ -53,10 +56,10 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
     <meta name="description" content={description} />
     <link rel="canonical" href={profile.url + '/'} />
     <link rel="preload" href={serifWoff2} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/sydney-683.webp" as="image" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href={`${b}/sydney-683.webp`} as="image" />
+    <link rel="icon" href={`${b}/favicon.ico`} sizes="32x32" />
+    <link rel="icon" href={`${b}/favicon.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${b}/apple-touch-icon.png`} />
     {contact.map((e) => <link rel="me" href={e.url} />)}
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfcfc" />
@@ -79,7 +82,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
     <div class="page">
       <main>
         <header>
-          <img class="avatar" src="/andre-144.webp" srcset="/andre-144.webp 1x, /andre-216.webp 2x" alt="" width="56" height="56" />
+          <img class="avatar" src={`${b}/andre-144.webp`} srcset={`${b}/andre-144.webp 1x, ${b}/andre-216.webp 2x`} alt="" width="56" height="56" />
           <h1>{profile.name}</h1>
           <p class="bio">
             I'm the co-founder and CEO of <a href="https://screenapp.io">ScreenApp</a>, an AI note taker for meetings and recordings, and <a href="https://carevo.com.au">Carevo</a>, a connection platform that helps Australian families find NDIS and aged care providers. I started Carevo after my family's own search for care.
@@ -132,8 +135,8 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
 
       <aside class="art" aria-label="Illustration of Sydney">
         <img
-          src="/sydney-683.webp"
-          srcset="/sydney-683.webp 683w, /sydney.webp 1024w"
+          src={`${b}/sydney-683.webp`}
+          srcset={`${b}/sydney-683.webp 683w, ${b}/sydney.webp 1024w`}
           sizes="(max-width: 900px) 100vw, 40vw"
           alt="Illustration of Sydney terrace houses and jacaranda trees, with the city and Harbour Bridge behind"
           width="1024"
