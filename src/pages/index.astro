@@ -105,7 +105,12 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
           <h2 id="speaking">Speaking</h2>
           <ul class="list">
             {talks.map((t) => (
-              <li><div><span class="t">{t.event}</span><span class="d">{t.year}</span></div></li>
+              <li>{t.photo
+                ? <button type="button" class="row-btn" data-lightbox={`${b}${t.photo.src}`} data-alt={t.photo.alt} data-caption={t.photo.caption} aria-haspopup="dialog">
+                    <span class="t">{t.event}<span class="note">, {t.role.toLowerCase()}</span></span>
+                    <span class="d"><img class="thumb" src={`${b}${t.photo.thumb}`} alt="" width="48" height="32" loading="lazy" />{t.year}</span>
+                  </button>
+                : <div><span class="t">{t.event}<span class="note">, {t.role.toLowerCase()}</span></span><span class="d">{t.year}</span></div>}</li>
             ))}
           </ul>
         </section>
@@ -134,6 +139,24 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
           {contact.map((e) => <a href={e.url} rel="me">{e.label}</a>)}
         </footer>
       </main>
+
+      <dialog class="lightbox" aria-label="Photo">
+        <form method="dialog"><button class="close" aria-label="Close">Close</button></form>
+        <img alt="" />
+        <p class="cap"></p>
+      </dialog>
+      <script is:inline>
+        (() => {
+          const d = document.querySelector('.lightbox');
+          if (!d || !d.showModal) return;
+          const img = d.querySelector('img'), cap = d.querySelector('.cap');
+          document.querySelectorAll('[data-lightbox]').forEach((el) => el.addEventListener('click', () => {
+            img.src = el.dataset.lightbox; img.alt = el.dataset.alt || ''; cap.textContent = el.dataset.caption || '';
+            d.showModal();
+          }));
+          d.addEventListener('click', (e) => { if (e.target === d || e.target === img) d.close(); });
+        })();
+      </script>
 
       <aside class="art" aria-label="Illustration of Sydney">
         <img
@@ -188,6 +211,21 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
   .list .d { flex: none; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 13px; color: var(--fg-3); font-variant-numeric: tabular-nums; text-align: right; }
   .list .note { color: var(--fg-2); }
   .list a:hover .t { text-decoration: underline; text-decoration-color: var(--underline); text-underline-offset: 3px; }
+
+
+  .row-btn { all: unset; box-sizing: border-box; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 10px 0; cursor: zoom-in; color: var(--fg); }
+  .row-btn:hover .t { text-decoration: underline; text-decoration-color: var(--underline); text-underline-offset: 3px; }
+  .row-btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 3px; }
+  .row-btn .d { display: inline-flex; align-items: center; gap: 12px; }
+  .thumb { width: 48px; height: 32px; object-fit: cover; border-radius: 4px; box-shadow: 0 0 0 1px var(--line); transition: transform 200ms ease; }
+  .row-btn:hover .thumb { transform: scale(1.06); }
+  .lightbox { padding: 0; border: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 94vh; overflow: visible; }
+  .lightbox::backdrop { background: rgb(10 10 10 / 0.82); backdrop-filter: blur(4px); }
+  .lightbox[open] { animation: lb 220ms ease both; }
+  @keyframes lb { from { opacity: 0; transform: scale(0.98); } }
+  .lightbox img { display: block; max-width: 100%; max-height: 84vh; width: auto; height: auto; border-radius: 10px; cursor: zoom-out; margin: 0 auto; }
+  .lightbox .cap { margin-top: 12px; text-align: center; color: #d8d8d8; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; }
+  .lightbox .close { position: absolute; top: -40px; right: 0; background: none; border: 0; color: #eee; font: 500 14px 'Inter Variable', system-ui, sans-serif; cursor: pointer; padding: 8px 0; }
 
   footer { display: flex; gap: 20px; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; }
 
