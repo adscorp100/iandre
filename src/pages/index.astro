@@ -1,0 +1,206 @@
+---
+import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import serifWoff2 from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
+import { profile, work, press, path, talks, videos, contact, cofounder, sameAsExtra } from '../data';
+
+const { title, description } = profile;
+const ogImage = `${profile.url}/og.png`;
+const andre = { '@id': `${profile.url}/#andre` };
+const founders = [andre, { '@type': 'Person', name: cofounder }];
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      ...andre,
+      name: profile.name,
+      url: profile.url,
+      image: `${profile.url}${profile.photo}`,
+      jobTitle: profile.jobTitle,
+      description,
+      worksFor: work.map((w) => ({ '@id': w.orgId })),
+      workLocation: { '@type': 'Place', name: 'Sydney, Australia' },
+      sameAs: [...contact.map((e) => e.url), ...sameAsExtra],
+    },
+    ...work.map((w) => ({
+      '@type': 'Organization',
+      '@id': w.orgId,
+      name: w.name,
+      url: w.url,
+      sameAs: [w.url],
+      description: w.orgDescription,
+      founder: founders,
+    })),
+    {
+      '@type': 'ProfilePage',
+      '@id': `${profile.url}/#page`,
+      url: `${profile.url}/`,
+      name: title,
+      dateModified: new Date().toLocaleDateString('en-CA', { timeZone: 'Australia/Sydney' }),
+      mainEntity: andre,
+    },
+  ],
+};
+const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font-display:swap;font-weight:100 900;src:url(${interWoff2}) format('woff2-variations');}@font-face{font-family:'Newsreader Variable';font-style:normal;font-display:swap;font-weight:200 800;src:url(${serifWoff2}) format('woff2-variations');}`;
+---
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={profile.url + '/'} />
+    <link rel="preload" href={serifWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sydney-683.webp" as="image" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {contact.map((e) => <link rel="me" href={e.url} />)}
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfcfc" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0b" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={profile.url + '/'} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profile.name}, co-founder and CEO of ScreenApp and Carevo, Sydney`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@andre_dean" />
+    <meta name="twitter:creator" content="@andre_dean" />
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+    <style set:html={fontFace} />
+  </head>
+  <body>
+    <div class="page">
+      <main>
+        <header>
+          <img class="avatar" src="/andre-144.webp" srcset="/andre-144.webp 1x, /andre-216.webp 2x" alt="" width="56" height="56" />
+          <h1>{profile.name}</h1>
+          <p class="bio">
+            I'm the co-founder and CEO of <a href="https://screenapp.io">ScreenApp</a>, an AI note taker for meetings and recordings, and <a href="https://carevo.com.au">Carevo</a>, a connection platform that helps Australian families find NDIS and aged care providers. I started Carevo after my family's own search for care.
+          </p>
+          <p class="bio">
+            Before that I worked in sales at Prezi, Infogram and myInterview. I live in Sydney.
+          </p>
+        </header>
+
+        <section aria-labelledby="watch">
+          <h2 id="watch">Watch</h2>
+          <ul class="list">
+            {videos.map((v) => (
+              <li><a href={`https://www.youtube.com/watch?v=${v.id}`}><span class="t">{v.title}</span><span class="d">{v.show}</span></a></li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="speaking">
+          <h2 id="speaking">Speaking</h2>
+          <ul class="list">
+            {talks.map((t) => (
+              <li><div><span class="t">{t.event}</span><span class="d">{t.year}</span></div></li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="press">
+          <h2 id="press">Featured in</h2>
+          <ul class="list">
+            {press.map((p) => (
+              <li><a href={p.url}><span class="t">{p.title}</span><span class="d">{p.publisher}, {p.year}</span></a></li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="path">
+          <h2 id="path">Path</h2>
+          <ul class="list">
+            {path.map((t) => (
+              <li><div><span class="t">{t.what}</span><span class="d">{t.when}</span></div></li>
+            ))}
+          </ul>
+        </section>
+
+        <footer>
+          {contact.map((e) => <a href={e.url} rel="me">{e.label}</a>)}
+        </footer>
+      </main>
+
+      <aside class="art" aria-label="Illustration of Sydney">
+        <img
+          src="/sydney-683.webp"
+          srcset="/sydney-683.webp 683w, /sydney.webp 1024w"
+          sizes="(max-width: 900px) 100vw, 40vw"
+          alt="Illustration of Sydney terrace houses and jacaranda trees, with the city and Harbour Bridge behind"
+          width="1024"
+          height="1536"
+          fetchpriority="high"
+        />
+      </aside>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fbfaf8; --fg: #1a1a1a; --fg-2: #5b5b5b; --fg-3: #8a8a8a; --line: #ebe8e3; --link: #1a1a1a; --underline: #c9c4bb;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) { --bg: #111111; --fg: #ededed; --fg-2: #a6a6a6; --fg-3: #7d7d7d; --line: #232323; --link: #ededed; --underline: #4a4a4a; color-scheme: dark; }
+  }
+  :root[data-theme='dark'] { --bg: #111111; --fg: #ededed; --fg-2: #a6a6a6; --fg-3: #7d7d7d; --line: #232323; --link: #ededed; --underline: #4a4a4a; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+    font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: var(--link); text-decoration: underline; text-decoration-color: var(--underline); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color 150ms ease; }
+  a:hover { text-decoration-color: var(--fg); }
+  p { margin: 0; }
+
+  .page { max-width: 1200px; margin: 0 auto; padding: 72px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 72px; align-items: start; }
+  main { max-width: 540px; display: grid; gap: 44px; }
+
+  header { display: grid; gap: 16px; }
+  .avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--line); }
+  h1 { margin: 4px 0 0; font-size: 30px; line-height: 1.2; font-weight: 500; letter-spacing: -0.015em; }
+  .bio { text-wrap: pretty; }
+  .bio + .bio { color: var(--fg-2); }
+
+  h2 { margin: 0 0 10px; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 13px; font-weight: 500; color: var(--fg-3); }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list li { border-top: 1px solid var(--line); }
+  .list li:last-child { border-bottom: 1px solid var(--line); }
+  .list a, .list li > div { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 10px 0; text-decoration: none; color: var(--fg); }
+  .list .t { text-wrap: pretty; min-width: 0; }
+  .list .d { flex: none; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 13px; color: var(--fg-3); font-variant-numeric: tabular-nums; text-align: right; }
+  .list a:hover .t { text-decoration: underline; text-decoration-color: var(--underline); text-underline-offset: 3px; }
+
+  footer { display: flex; gap: 20px; font-family: 'Inter Variable', system-ui, sans-serif; font-size: 14px; }
+
+  .art { position: sticky; top: 72px; }
+  .art img { display: block; width: 100%; height: auto; max-height: calc(100vh - 144px); object-fit: cover; border-radius: 16px; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.35); }
+
+  :focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 3px; }
+  main > * { animation: in 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .art { animation: art 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both; }
+  @keyframes in { from { opacity: 0; transform: translateY(6px); } }
+  @keyframes art { from { opacity: 0; transform: scale(0.985); } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+  @media (max-width: 900px) {
+    .page { grid-template-columns: minmax(0, 1fr); padding: 40px 20px 56px; gap: 40px; }
+    .art { position: static; order: -1; }
+    .art img { max-height: 46vh; aspect-ratio: 4 / 3; object-position: 50% 40%; }
+    main { gap: 36px; }
+    h1 { font-size: 26px; }
+    body { font-size: 16.5px; }
+  }
+</style>
