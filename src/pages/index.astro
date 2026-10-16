@@ -1,7 +1,7 @@
 ---
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import serifWoff2 from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
-import { profile, work, press, path, talks, videos, contact, cofounder, sameAsExtra } from '../data';
+import { profile, work, press, path, talks, videos, contact, cofounder, sameAsExtra, knowsAbout } from '../data';
 
 // Asset prefix: '' on iandre.com, '/iandre' while previewing on github.io.
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -11,6 +11,7 @@ const ogImage = `${profile.url}/og.png`;
 const andre = { '@id': `${profile.url}/#andre` };
 const founders = [andre, { '@type': 'Person', name: cofounder }];
 
+const site = { '@id': `${profile.url}/#website` };
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -19,28 +20,53 @@ const graph = {
       ...andre,
       name: profile.name,
       alternateName: profile.alternateName,
+      givenName: 'Andre',
+      familyName: 'Smith',
       url: profile.url,
       image: `${profile.url}${profile.photo}`,
       jobTitle: profile.jobTitle,
       description,
+      disambiguatingDescription: 'Sydney-based co-founder and CEO of ScreenApp and Carevo.',
       worksFor: work.map((w) => ({ '@id': w.orgId })),
       workLocation: { '@type': 'Place', name: 'Sydney, Australia' },
+      address: { '@type': 'PostalAddress', addressLocality: 'Sydney', addressRegion: 'NSW', addressCountry: 'AU' },
+      alumniOf: [
+        { '@type': 'CollegeOrUniversity', name: 'UNSW Sydney', url: 'https://www.unsw.edu.au' },
+        { '@type': 'Organization', name: 'Antler Australia', url: 'https://www.antler.co/location/australia' },
+        { '@type': 'Organization', name: 'UNSW Founders 10x Accelerator', url: 'https://unswfounders.com' },
+      ],
+      knowsAbout: knowsAbout,
       sameAs: [...contact.map((e) => e.url), ...sameAsExtra],
+      subjectOf: [
+        ...press.map((p) => ({ '@type': 'Article', headline: p.title, url: p.url, publisher: { '@type': 'Organization', name: p.publisher } })),
+        ...videos.map((v) => ({ '@type': 'VideoObject', name: v.title, url: `https://www.youtube.com/watch?v=${v.id}`, thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`, uploadDate: v.uploadDate })),
+      ],
+      performerIn: talks.map((t) => ({
+        '@type': 'Event',
+        name: `${t.event}, ${t.role.toLowerCase()}`,
+        startDate: t.date,
+        location: { '@type': 'Place', name: t.place },
+        ...(t.photo ? { image: `${profile.url}${t.photo.src}` } : {}),
+      })),
     },
     ...work.map((w) => ({
       '@type': 'Organization',
       '@id': w.orgId,
       name: w.name,
       url: w.url,
-      sameAs: [w.url],
+      sameAs: w.sameAs,
       description: w.orgDescription,
       founder: founders,
     })),
+    { '@type': 'WebSite', ...site, url: `${profile.url}/`, name: profile.name, inLanguage: 'en-AU' },
     {
       '@type': 'ProfilePage',
       '@id': `${profile.url}/#page`,
       url: `${profile.url}/`,
       name: title,
+      inLanguage: 'en-AU',
+      isPartOf: site,
+      dateCreated: '2026-10-16',
       dateModified: new Date().toLocaleDateString('en-CA', { timeZone: 'Australia/Sydney' }),
       mainEntity: andre,
     },
@@ -83,7 +109,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
     <div class="page">
       <main>
         <header>
-          <img class="avatar" src={`${b}/andre-144.webp`} srcset={`${b}/andre-144.webp 1x, ${b}/andre-216.webp 2x`} alt="" width="56" height="56" />
+          <img class="avatar" src={`${b}/andre-144.webp`} srcset={`${b}/andre-144.webp 1x, ${b}/andre-216.webp 2x`} alt="Andre Smith" width="56" height="56" />
           <h1>{profile.name}</h1>
           <p class="bio">
             I'm the co-founder and CEO of <a href="https://screenapp.io">ScreenApp</a>, an AI note taker for meetings and recordings, and <a href="https://carevo.com.au">Carevo</a>, a connection platform that helps Australian families find NDIS and aged care providers. I started Carevo after my family's own search for care.

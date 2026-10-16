@@ -24,7 +24,7 @@ export const profile = {
 
 // orgId: reuse the site's own JSON-LD @id where it publishes one (carevo.com.au
 // does, checked 16 Oct 2026); screenapp.io publishes none, so we mint one here.
-export const work: { name: string; description: string; url: string; domain: string; orgDescription: string; orgId: string }[] = [
+export const work: { name: string; description: string; url: string; domain: string; orgDescription: string; orgId: string; sameAs: string[] }[] = [
   {
     name: 'ScreenApp',
     description: 'AI note taker, recorder and transcription.',
@@ -32,6 +32,7 @@ export const work: { name: string; description: string; url: string; domain: str
     domain: 'screenapp.io',
     orgDescription: 'AI note taker, recorder and transcription.',
     orgId: 'https://iandre.com/#screenapp',
+    sameAs: ['https://screenapp.io', 'https://unswfounders.com/our-startups/screenapp'],
   },
   {
     name: 'Carevo',
@@ -40,6 +41,7 @@ export const work: { name: string; description: string; url: string; domain: str
     domain: 'carevo.com.au',
     orgDescription: 'A connection platform that helps Australian families find NDIS and aged care providers.',
     orgId: 'https://carevo.com.au/#organization',
+    sameAs: ['https://carevo.com.au', 'https://www.linkedin.com/company/carevoau'],
   },
 ];
 
@@ -58,11 +60,13 @@ export const path: { when: string; what: string; note?: string; url?: string }[]
   { when: '2014', what: 'UNSW Sydney', url: 'https://www.unsw.edu.au' },
 ];
 
-export const talks: { event: string; role: string; year: string; url?: string; photo?: { src: string; mid: string; alt: string; caption: string } }[] = [
+export const talks: { event: string; role: string; year: string; date: string; place: string; url?: string; photo?: { src: string; mid: string; alt: string; caption: string } }[] = [
   {
     event: 'Antler Australia',
     role: 'Go-to-market masterclass',
     year: '2026',
+    date: '2026-02',
+    place: 'Antler Australia, Sydney',
     photo: {
       src: '/antler-gtm-masterclass-2026.webp',
       mid: '/antler-gtm-masterclass-2026-960.webp',
@@ -74,6 +78,8 @@ export const talks: { event: string; role: string; year: string; url?: string; p
     event: 'Google Cloud Summit Sydney',
     role: 'Panel',
     year: '2025',
+    date: '2025',
+    place: 'Sydney',
     photo: {
       src: '/google-cloud-summit-2025.webp',
       mid: '/google-cloud-summit-2025-960.webp',
@@ -84,8 +90,8 @@ export const talks: { event: string; role: string; year: string; url?: string; p
 ];
 
 // Video appearances, shown with thumbnails.
-export const videos: { show: string; title: string; year: string; id: string }[] = [
-  { show: 'The Diary of a Founder', title: 'Interview on The Diary of a Founder', year: '2026', id: 'hxTc6DRMoxI' },
+export const videos: { show: string; title: string; year: string; id: string; uploadDate: string }[] = [
+  { show: 'The Diary of a Founder', title: 'Interview on The Diary of a Founder', year: '2026', id: 'hxTc6DRMoxI', uploadDate: '2026-02-25' },
 ];
 
 export const press: { publisher: string; kind: string; title: string; year: string; url: string }[] = [
@@ -105,7 +111,18 @@ export const contact: { label: string; url: string }[] = [
 
 // Structured data only, not shown on the page.
 export const sameAsExtra = [
+  'https://gitlab.com/andre_dean',
   'https://www.crunchbase.com/person/andre-dean-smith',
   'https://screenapp.io/author/andre-smith',
   'https://carevo.com.au/authors/andre-smith',
+];
+
+// Structured data only. Topics drawn from his work and his author pages.
+export const knowsAbout = [
+  'AI note taking',
+  'Speech-to-text transcription',
+  'SaaS go-to-market',
+  'Search and content growth',
+  'NDIS',
+  'Aged care in Australia',
 ];
