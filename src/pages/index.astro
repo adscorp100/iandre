@@ -162,6 +162,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
       </script>
 
       <aside class="art" aria-label="Illustration of Sydney">
+        <div class="art-frame" data-base={b}>
         <img
           src={`${b}/sydney-683.webp`}
           srcset={`${b}/sydney-683.webp 683w, ${b}/sydney.webp 1024w`}
@@ -171,7 +172,10 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
           height="1536"
           fetchpriority="high"
         />
+        <canvas class="fx" aria-hidden="true"></canvas>
+        </div>
       </aside>
+      <script>import '../scripts/art.js';</script>
     </div>
   </body>
 </html>
@@ -241,13 +245,14 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
 
   /* Art stays vertically centred in the viewport while the text column scrolls. */
   .art { position: sticky; top: 0; height: 100vh; height: 100dvh; margin-top: -72px; display: flex; align-items: center; }
-  .art img { display: block; width: 100%; height: auto; max-height: calc(100vh - 144px); object-fit: cover; border-radius: 16px; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.35); }
+  .art-frame { position: relative; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.35); isolation: isolate; }
+  .art img { display: block; width: 100%; height: auto; max-height: calc(100vh - 144px); object-fit: cover; }
+  .art canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
+  .art-frame.is-live canvas { opacity: 1; }
 
   :focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 3px; }
   main > * { animation: in 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-  .art { animation: art 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both; }
   @keyframes in { from { opacity: 0; transform: translateY(6px); } }
-  @keyframes art { from { opacity: 0; transform: scale(0.985); } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
   @media (max-width: 900px) {
