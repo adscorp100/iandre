@@ -3,6 +3,8 @@
 
 export const profile = {
   name: 'Andre Smith',
+  // Hidden search data only: people search the full name. Never shown on the page.
+  alternateName: 'Andre Dean Smith',
   lede: 'Co-founder and CEO of ScreenApp and Carevo. Sydney.',
   jobTitle: 'Co-founder and CEO',
   // Bio carries the why; the Work rows carry the what.
