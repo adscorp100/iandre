@@ -93,6 +93,7 @@ export const press: { publisher: string; kind: string; title: string; year: stri
   { publisher: 'Pulse+IT', kind: 'Press', title: 'Carevo offers time-saving connection to a provider', year: '2026', url: 'https://www.pulseit.news/aged-community-disabled-care/carevo-offers-time-saving-connection-to-a-provider/' },
   { publisher: 'Antler', kind: 'Founder story', title: 'A first-time founder shares his experience building a startup with Antler', year: '2023', url: 'https://www.antler.co/blog/first-time-founder-building-startup-with-antler' },
   { publisher: 'Balance The Grind', kind: 'Interview', title: 'Andre Smith, co-founder and CEO at ScreenApp', year: '2023', url: 'https://balancethegrind.co/interviews/andre-dean-smith-co-founder-ceo-at-screenapp/' },
+  { publisher: 'Startup Daily', kind: 'Antler investor memo', title: 'ScreenApp revolutionises video capture and organisation with AI', year: '2023', url: 'https://www.startupdaily.net/partner-content/antler-australia/antler-investor-memo-series-business-assistant-screenapp-revolutionises-video-capture-and-organisation-with-ai/' },
 ];
 
 export const contact: { label: string; url: string }[] = [
