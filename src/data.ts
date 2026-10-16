@@ -58,6 +58,17 @@ export const path: { when: string; what: string; note?: string; url?: string }[]
 
 export const talks: { event: string; role: string; year: string; url?: string; photo?: { src: string; mid: string; alt: string; caption: string } }[] = [
   {
+    event: 'Antler Australia',
+    role: 'Go-to-market masterclass',
+    year: '2026',
+    photo: {
+      src: '/antler-gtm-masterclass-2026.webp',
+      mid: '/antler-gtm-masterclass-2026-960.webp',
+      alt: 'Andre Smith presenting a go-to-market masterclass to founders at Antler Australia, February 2026',
+      caption: 'Go-to-market masterclass for founders at Antler Australia, February 2026. Andre speaks regularly at Antler.',
+    },
+  },
+  {
     event: 'Google Cloud Summit Sydney',
     role: 'Panel',
     year: '2025',
